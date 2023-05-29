@@ -8,3 +8,10 @@ sed -i "4 s/\(.*\)\b/\1 $(echo $master_ip)/" /etc/ansible/hosts
 
 export worker2_ip=ansible_host=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=worker-2" --query "Reservations[].Instances[].PublicIpAddress" --output text)
 sed -i "5 s/\(.*\)\b/\1 $(echo $master_ip)/" /etc/ansible/hosts
+
+
+
+scp -i "keypair1.pem" "kerpair1.pem" ubuntu@$(echo $master_ip):~
+scp -i "keypair1.pem" "kerpair1.pem" ubuntu@$(echo $worker1_ip):~
+scp -i "keypair1.pem" "kerpair1.pem" ubuntu@$(echo $worker2_ip):~
+
