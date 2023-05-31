@@ -1,15 +1,15 @@
 variable "ami" {
-  description = "AMI ID of the instance"
+  description = "ami-0ed99df77a82560e6"
 }
 
 variable "instance_type" {
-  description = "Instance type"
+  description = "t2.medium"
 }
 
 variable "subnet_id" {
-  description = "Subnet ID"
+  description = "aws_subnet.subnet1.id"
 }
 
 variable "security_group_id" {
-  description = "Security Group ID"
+  description = "aws_security_group.allow"
 }
