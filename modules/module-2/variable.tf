@@ -1,9 +1,9 @@
 variable "security_group_name" {
-  description = "Name of the security group"
+  description = "security_group1"
   type        = string
 }
 
 variable "vpc_id" {
-  description = "ID of the VPC"
+  description = "aws_vpc.vpc1.id"
   type        = string
 }
