@@ -11,5 +11,5 @@ variable "subnet_id" {
 }
 
 variable "security_group_id" {
-  description = "aws_security_group.allow"
+  description = "aws_security_group.allow_all.id"
 }
