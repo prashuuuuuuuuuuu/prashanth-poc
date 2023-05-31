@@ -11,4 +11,14 @@ provider "aws" {
 }
 
 module "prashanth1"{
-  source=
+  source= ".//module-1"
+}
+  
+  
+  module "prashanth2"{
+  source= ".//module-2"
+}
+    
+    module "prashanth3"{
+  source= ".//module-3"
+}
