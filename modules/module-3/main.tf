@@ -1,5 +1,5 @@
 resource "aws_instance" "master" {
-  instance_name = "master"
+  instance1_name = "master"
   ami           = var.ami
   key           = "tokyo"
   instance1_type = var.instance_type
@@ -8,7 +8,7 @@ resource "aws_instance" "master" {
 }
 
 resource "aws_instance" "worker_1" {
-  instance_name = "worker_1"
+  instance2_name = "worker_1"
   ami           = var.ami
   key           = "tokyo"
   instance2_type = var.instance_type
@@ -17,7 +17,7 @@ resource "aws_instance" "worker_1" {
 }
 
 resource "aws_instance" "worker_2" {
-  instance_nmae = "worker_2"
+  instance3_nmae = "worker_2"
   ami           = var.ami
    key           = "tokyo"
   instance3_type = var.instance_type
