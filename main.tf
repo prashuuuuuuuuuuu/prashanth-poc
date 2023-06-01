@@ -12,11 +12,11 @@ public_subnet1_az = "ap-northeast-1a"
 
 public_subnet1_tag = var.public_subnet1_tag
 
-vpc_id = "${module.my_vpc.vpc_id}"
+vpc_id = "${module.vpc.vpc_id}"
 
-subnet_id = "${module.my_vpc.subnet_id}"
+subnet_id = "${module.vpc.subnet_id}"
 
-route_table_id = "${module.my_vpc.route_table_id}"
+route_table_id = "${module.vpc.route_table_id}"
 
 }
 
