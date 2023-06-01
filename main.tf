@@ -24,7 +24,7 @@ module "instances"{
 
 source = "git::https://dheerajthuniki@bitbucket.org/devopsnew123/devops.git//ec2"
 
-ami_instance = "ami-0ed99df77a82560e6"
+ami = "ami-0ed99df77a82560e6"
 
 instance_type = "t2.medium"
 
