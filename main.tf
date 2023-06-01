@@ -1,24 +1,43 @@
-terraform {
-required_providers {
-aws = {
-source = "hashicorp/aws"
-version = "~> 4.0"
-}
-}
-}
-provider "aws" {
-  region = "ap-northeast-1"  # Replace with your desired region
+module "vpc"{
+
+source = "git::https://dheerajthuniki@bitbucket.org/devopsnew123/devops.git//vpc"
+
+my_vpc_cidr = var.my_vpc_cidr
+
+my_vpc_tag = var.my_vpc_tag
+
+public_subnet1_cidr = var.public_subnet1_cidr
+
+public_subnet1_az = "ap-northeast-1a"
+
+public_subnet1_tag = var.public_subnet1_tag
+
+vpc_id = "${module.my_vpc.vpc_id_value}"
+
+subnet_id = "${module.my_vpc.subnet_id_value}"
+
+route_table_id = "${module.my_vpc.route_table_id_value}"
+
 }
 
-module "prashanth1"{
-  source= ".//module-1"
-}
-  
-  
-  module "prashanth2"{
-  source= ".//module-2"
-}
-    
-    module "prashanth3"{
-  source= ".//module-3"
+module "instances"{
+
+source = "git::https://dheerajthuniki@bitbucket.org/devopsnew123/devops.git//ec2"
+
+ami_instance = ""
+
+instance_type = "t2.medium"
+
+instance_name = "master"
+
+key_pair = "tokyo"
+
+instance_type2 = "t2.micro"
+
+instance_name2 = "worker"
+
+subnet_id = "${module.my_vpc.subnet_id_value}"
+
+vpc_id = "${module.my_vpc.vpc_id_value}"
+
 }
