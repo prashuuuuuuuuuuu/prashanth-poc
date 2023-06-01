@@ -10,10 +10,10 @@ variable "instance_type" {
 
 variable "subnet_id" {
   description = "aws_subnet_id"
-  default = module.module-3.aws_subnet
+  
 }
 
 variable "security_group_id" {
   description = "aws_security_group_id"
-  value = module.module-3.aws_security_group
+  
 }
