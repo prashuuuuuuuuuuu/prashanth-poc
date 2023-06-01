@@ -12,11 +12,11 @@ public_subnet1_az = "ap-northeast-1a"
 
 public_subnet1_tag = var.public_subnet1_tag
 
-vpc_id = "${module.my_vpc.vpc_id_value}"
+vpc_id = "${module.my_vpc.vpc_id}"
 
-subnet_id = "${module.my_vpc.subnet_id_value}"
+subnet_id = "${module.my_vpc.subnet_id}"
 
-route_table_id = "${module.my_vpc.route_table_id_value}"
+route_table_id = "${module.my_vpc.route_table_id}"
 
 }
 
@@ -36,8 +36,8 @@ instance2_type = "t2.micro"
 
 instance2_name = "worker"
 
-subnet_id = "${module.vpc.subnet_id_value}"
+subnet_id = "${module.vpc.subnet_id}"
 
-vpc_id = "${module.vpc.vpc_id_value}"
+vpc_id = "${module.vpc.vpc_id}"
 
 }
