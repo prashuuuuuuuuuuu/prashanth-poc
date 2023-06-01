@@ -2,17 +2,17 @@ provider "aws" {
   region = "us-west-2"
 }
 
-resource "aws_vpc" "my_vpc" {
+resource "aws_vpc" "vpc1" {
   cidr_block = var.vpc_cidr_block
 }
 
-resource "aws_subnet" "my_subnet" {
+resource "aws_subnet" "subnet1" {
   vpc_id            = aws_vpc.my_vpc.id
   cidr_block        = var.subnet_cidr_block
   availability_zone = var.subnet_availability_zone
 }
 
-resource "aws_route_table" "my_route_table" {
+resource "aws_route_table" "route_table1" {
   vpc_id = aws_vpc.my_vpc.id
 
   route {
@@ -21,11 +21,11 @@ resource "aws_route_table" "my_route_table" {
   }
 }
 
-resource "aws_internet_gateway" "my_igw" {
+resource "aws_internet_gateway" "igw1" {
   vpc_id = aws_vpc.my_vpc.id
 }
 
-resource "aws_security_group" "my_security_group" {
+resource "aws_security_group" "security_group1" {
   name        = "allow-all-traffic"
   description = "Security group allowing all traffic"
 
@@ -43,3 +43,22 @@ resource "aws_security_group" "my_security_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+
+
+
+
+output "vpc_id" {
+  description = "ID of the created VPC"
+  value       = aws_vpc.vpc1.id
+}
+
+output "subnet_id" {
+  description = "ID of the created subnet"
+  value       = aws_subnet.subnet1.id
+}
+
+output "security_group_id"
+  description = "ID of the security_group_id"
+  default =  aws_security_group.security_group1.id"
+
