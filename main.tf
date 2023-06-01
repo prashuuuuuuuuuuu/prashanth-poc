@@ -36,8 +36,8 @@ instance2_type = "t2.micro"
 
 instance2_name = "worker"
 
-subnet_id = "${module.my_vpc.subnet_id_value}"
+subnet_id = "${module.vpc.subnet_id_value}"
 
-vpc_id = "${module.my_vpc.vpc_id_value}"
+vpc_id = "${module.vpc.vpc_id_value}"
 
 }
