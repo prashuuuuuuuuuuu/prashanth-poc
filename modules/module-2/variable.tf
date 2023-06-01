@@ -6,4 +6,5 @@
 variable "vpc_id" {
   description = "aws_vpc.vpc1.id"
   type        = string
+  value = module.module-2.aws_vpc_id
 }
