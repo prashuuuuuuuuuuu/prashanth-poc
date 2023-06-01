@@ -26,15 +26,19 @@ source = "git::https://dheerajthuniki@bitbucket.org/devopsnew123/devops.git//ec2
 
 ami = "ami-0ed99df77a82560e6"
 
-instance_type = "t2.medium"
+instance1_type = "t2.medium"
 
-instance_name = "master"
+instance1_name = "master"
 
 key_pair = "tokyo"
 
 instance2_type = "t2.micro"
 
-instance2_name = "worker"
+instance2_name = "worker-1"
+
+instance3_name = "worker-2"
+
+instance3_type = "t2.micro"
 
 subnet_id = "${module.vpc.subnet_id}"
 
