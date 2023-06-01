@@ -11,7 +11,7 @@ output "instance3_id" {
 }
 
 output "subnet_id" {
-  value = "aws_subnet_id.subnet1.id"
+  value = "aws_subnet.subnet1.id"
   
   output "vpc_id" {
-    value = "aws_vpc_id.vpc1.id"
+    value = "aws_vpc.vpc1.id"
