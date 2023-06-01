@@ -24,7 +24,7 @@ module "instances"{
 
 source = "git::https://dheerajthuniki@bitbucket.org/devopsnew123/devops.git//ec2"
 
-ami_instance = ""
+ami_instance = "ami-0ed99df77a82560e6"
 
 instance_type = "t2.medium"
 
@@ -32,9 +32,9 @@ instance_name = "master"
 
 key_pair = "tokyo"
 
-instance_type2 = "t2.micro"
+instance2_type = "t2.micro"
 
-instance_name2 = "worker"
+instance2_name = "worker"
 
 subnet_id = "${module.my_vpc.subnet_id_value}"
 
