@@ -1,4 +1,4 @@
 output "aws_vpc" {
-  description = "ID of the created vpc"
+  description = "aws_vpc.vpc1.id"
   value       = 
 }
