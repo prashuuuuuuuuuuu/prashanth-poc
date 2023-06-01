@@ -1,5 +1,5 @@
-resource "aws_security_group" "allow_all" {
-  name        = var.security_group_name
+resource "aws_security_group" "security_group1" {
+#  name        = var.security_group_name
   description = "Allow all traffic"
   vpc_id      = var.vpc_id
 
