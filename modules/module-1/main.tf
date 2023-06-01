@@ -60,7 +60,7 @@ output "subnet_id" {
 
 output "security_group_id" {
   description = "ID of the security_group_id"
-  default =  aws_security_group.security_group1.id"
+  value =  aws_security_group.security_group1.id"
 }
 
 output "route_table_id" {
