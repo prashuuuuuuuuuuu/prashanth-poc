@@ -10,8 +10,9 @@ variable "subnet_cidr_block" {
   default     = "20.0.0.0/24"
 }
 
-variable "availability_zone" {
-  description = "Availability zone for the subnet"
+variable "subnet_availability_zone" {
+  description = "Availability Zone for the subnet"
   type        = string
-  default     = "ap-northeast-1a"
+  default     = "ap-northeast-2"
 }
+
