@@ -47,7 +47,7 @@ resource "aws_route_table_association" "my_route_table_association" {
 
 # Create a security group allowing all traffic
 resource "aws_security_group" "security_group1" {
-  name        = "my-security-group"
+  name        = "security_group1"
   description = "Allow all traffic"
   vpc_id      = aws_vpc.vpc1.id
 
@@ -82,8 +82,8 @@ resource "aws_instance" "worker-1" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
   key_name               = "tokyo"
-  subnet_id              = aws_subnet.my_subnet.id
-  vpc_security_group_ids = [aws_security_group.my_security_group.id]
+  subnet_id              = aws_subnet.subnet1.id
+  vpc_security_group_ids = [aws_security_group.security_group1.id]
   tags = {
     Name = "worker-1"
   }
@@ -92,7 +92,7 @@ resource "aws_instance" "worker-1" {
 resource "aws_instance" "worker-2" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
-  key_name                    = "tokyo"
+  key_name               = "tokyo"
   subnet_id              = aws_subnet.subnet1.id
   vpc_security_group_ids = [aws_security_group.security_group1.id]
   tags = {
