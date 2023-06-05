@@ -1,7 +1,4 @@
-#variable "region" {
-#  description = "AWS region"
-#  default     = "ap-northeast-1"
-#}
+
 
 variable "vpc_cidr_block" {
   description = "CIDR block for the VPC"
@@ -28,7 +25,4 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
-variable "peer_vpc_id" {
-  description = "vpc-06fa15513cc3b550b"
-  value = "vpc-06fa15513cc3b550b"
-}
+
