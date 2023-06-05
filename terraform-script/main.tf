@@ -9,7 +9,7 @@ version = "~> 4.0"
 
 # Configure the AWS Provider
 provider "aws" {
-region = "ap-northeast-2"
+region = "ap-northeast-1"
 }
 
 # Create a VPC
@@ -70,10 +70,10 @@ resource "aws_security_group" "security_group1" {
 resource "aws_instance" "master" {
   ami                    = var.ami_id
   instance_type          = "t2.micro"
-  subnet_id              = aws_subnet.my_subnet.id
-  vpc_security_group_ids = [aws_security_group.my_security_group.id]
+  subnet_id              = aws_subnet.subnet1.id
+  vpc_security_group_ids = [aws_security_group.security_group1.id]
   tags = {
-    Name = "Instance1"
+    Name = "master"
   }
 }
 
@@ -83,7 +83,7 @@ resource "aws_instance" "worker-1" {
   subnet_id              = aws_subnet.my_subnet.id
   vpc_security_group_ids = [aws_security_group.my_security_group.id]
   tags = {
-    Name = "Instance2"
+    Name = "worker-1"
   }
 }
 
@@ -93,16 +93,16 @@ resource "aws_instance" "worker-2" {
   subnet_id              = aws_subnet.my_subnet.id
   vpc_security_group_ids = [aws_security_group.my_security_group.id]
   tags = {
-    Name = "Instance3"
+    Name = "worker-2"
   }
 }
 
 # Create VPC peering connection
 resource "aws_vpc_peering_connection" "my_peering_connection" {
   vpc_id                 = aws_vpc.vpc1.id
-  peer_vpc_id            = var.peer_vpc_id
+  peer_vpc_id            = "vpc-06fa15513cc3b550b"
   auto_accept            = true
-  allow_remote_vpc_dns_resolution = true
+#  allow_remote_vpc_dns_resolution = true
   tags = {
     Name = "VPC Peering Connection"
   }
