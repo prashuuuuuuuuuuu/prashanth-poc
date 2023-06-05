@@ -69,7 +69,8 @@ resource "aws_security_group" "security_group1" {
 # Create individual instances
 resource "aws_instance" "master" {
   ami                    = var.ami_id
-  instance_type          = "t2.micro"
+  instance_type          = "t2.medium"
+  key_name               = "tokyo"
   subnet_id              = aws_subnet.subnet1.id
   vpc_security_group_ids = [aws_security_group.security_group1.id]
   tags = {
@@ -79,7 +80,8 @@ resource "aws_instance" "master" {
 
 resource "aws_instance" "worker-1" {
   ami                    = var.ami_id
-  instance_type          = "t2.micro"
+  instance_type          = var.instance_type
+  key_name               = "tokyo"
   subnet_id              = aws_subnet.my_subnet.id
   vpc_security_group_ids = [aws_security_group.my_security_group.id]
   tags = {
@@ -90,8 +92,9 @@ resource "aws_instance" "worker-1" {
 resource "aws_instance" "worker-2" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
-  subnet_id              = aws_subnet.my_subnet.id
-  vpc_security_group_ids = [aws_security_group.my_security_group.id]
+  key_name                    = "tokyo"
+  subnet_id              = aws_subnet.subnet1.id
+  vpc_security_group_ids = [aws_security_group.security_group1.id]
   tags = {
     Name = "worker-2"
   }
