@@ -1,0 +1,85 @@
+pipeline {
+   agent any
+
+     tools {
+      terraform 'Terraform-11'
+    }
+
+    stages{
+        stage ('git checkout scripts'){
+            steps{
+                 git branch: 'main', url: 'https://github.com/prashuuuuuuuuuuu/scripts.git'
+            }
+        }
+
+        stage('AWS Configuration') {
+            steps {
+                script {
+                    // Configure AWS CLI with empty values
+                    sh 'aws configure set aws_access_key_id "AKIARCAV4IQ7FJHXAJFB"'
+                    sh 'aws configure set aws_secret_access_key "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"'
+                    sh 'aws configure set default_region "ap-northeast-1"'
+                    sh 'aws configure set output "json"'
+                }
+            }
+        }
+
+        stage('terraform init') {
+            steps {
+                dir('terraform-script'){
+                sh 'terraform init'
+                }
+            }
+        }
+
+ 
+
+ 
+
+        stage('terraform apply') {
+            steps {
+                dir('terraform-script'){
+
+                sh 'terraform apply -auto-approve'
+                }
+            }
+        }
+
+        stage('Sleep') {
+            steps {
+                script {
+                    sleep 15 // Sleep for 15 seconds
+                }
+            }
+        }
+
+        stage('ansible inventory configure'){
+            steps{
+                sh '''
+                  export masterip=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=master" --query "Reservations[].Instances[].PublicIpAddress" --output text)
+                  export worker1ip=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=worker-1" --query "Reservations[].Instances[].PublicIpAddress" --output text)
+                  export worker2ip=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=worker-2" --query "Reservations[].Instances[].PublicIpAddress" --output text)
+
+                  cp /home/ubuntu/tokyo.pem .    
+                  scp -i "tokyo.pem" "tokyo.pem" ubuntu@$(echo $masterip):~
+                  scp -i "tokyo.pem" "tokyo.pem" ubuntu@$(echo $worker1ip):~
+                  scp -i "tokyo.pem" "tokyo.pem" ubuntu@$(echo $worker2ip):~
+
+ 
+
+
+                  export master_ip=ansible_host=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=master" --query "Reservations[].Instances[].PublicIpAddress" --output text)
+                  export worker1_ip=ansible_host=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=worker-1" --query "Reservations[].Instances[].PublicIpAddress" --output text)
+                  export worker2_ip=ansible_host=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=worker-2" --query "Reservations[].Instances[].PublicIpAddress" --output text)
+
+
+                 '''
+
+ 
+
+                
+            }
+        }
+
+    }
+}
