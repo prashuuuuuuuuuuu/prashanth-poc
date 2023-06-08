@@ -1,1 +1,15 @@
+# Use an official Nginx image as the base
+FROM nginx:latest
+
+# Copy the nginx.conf file to the appropriate path
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Copy the contents of the dist folder to the root folder of the Nginx server
+COPY dist/ang-products/* /usr/share/nginx/html/
+
+# Expose the default Nginx port (port 80)
+EXPOSE 80
+
+# Start Nginx when the container launches
+CMD ["nginx", "-g", "daemon off;"]
 
