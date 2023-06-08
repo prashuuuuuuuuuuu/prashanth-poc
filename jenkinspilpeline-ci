@@ -1,0 +1,69 @@
+pipeline {
+    agent any
+    stages{
+        stage('git checkout-frontend'){
+            steps{
+                git branch: 'main', url: 'https://github.com/prashuuuuuuuuuuu/react-ui.git' 
+            }
+        }
+       stage('npm install & npm build'){
+         steps{
+                dir('vivant-ui'){
+                 sh 'npm install'
+                 sh 'npm run build'
+                 }
+            }
+        }
+
+
+
+         stage('dockerbuild-frontend/push'){
+            steps{
+                  sh 'mv dockerfile1 vivant-ui'
+
+                 dir ('vivant-ui'){
+                    sh 'docker build -t prashusphere/frontend -f dockerfile1 .'
+                    withCredentials([string(credentialsId: 'docker_hub', variable: 'docker_hub')]) {
+    sh 'docker login -u prashusphere -p ${docker_hub}'
+}
+                    sh 'docker push prashusphere/frontend'
+                }
+
+            }
+        }
+
+
+
+        stage('git checkout-backend'){
+            steps{
+                git branch: 'main', url: 'https://github.com/prashuuuuuuuuuuu/node-backend.git'
+            }
+        }
+
+         stage('dockerbuild-backend/db push'){
+            steps{
+                  sh 'mv dockerfile2.yml vivant-backend'
+
+                 dir ('vivant-backend'){
+                    sh 'docker build -t prashusphere/backend -f dockerfile2.yml .'
+                    withCredentials([string(credentialsId: 'docker_hub', variable: 'docker_hub')]) {
+    sh 'docker login -u prashusphere -p ${docker_hub}'
+}
+                   sh 'docker push prashusphere/db'
+
+
+                    sh 'docker build -t prashusphere/db -f dockerfile3 .'
+                    withCredentials([string(credentialsId: 'docker_hub', variable: 'docker_hub')]) {
+    sh 'docker login -u prashusphere -p ${docker_hub}'
+}
+                    sh 'docker push prashusphere/db'
+                }
+
+            }
+        }
+
+
+
+
+    }
+}
